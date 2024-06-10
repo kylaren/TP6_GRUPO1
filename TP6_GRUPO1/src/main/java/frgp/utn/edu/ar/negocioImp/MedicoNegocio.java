@@ -24,7 +24,7 @@ public class MedicoNegocio implements IMedicoNegocio {
 	public IdaoMedico getDaoMedico() {
 		return daoMedico;
 	}
-	public void setDaoUsuario(IdaoMedico daoMedico) {
+	public void setDaoMedico(IdaoMedico daoMedico) {
 		this.daoMedico = daoMedico;
 	}
 	
