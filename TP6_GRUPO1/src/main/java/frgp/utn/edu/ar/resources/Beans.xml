@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+     http://www.springframework.org/schema/beans
+     http://www.springframework.org/schema/beans/spring-beans.xsd
+     http://www.springframework.org/schema/tx
+     http://www.springframework.org/schema/tx/spring-tx.xsd
+     http://www.springframework.org/schema/aop
+     http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+
+    <bean id="beanMedicoNegocio" class="frgp.utn.edu.ar.negocioImp.MedicoNegocio" scope="singleton">
+		<property name="daoMedico" ref="beanDaoMedico"></property>
+	</bean>
+	
+	 <bean id="beanDaoMedico" class="frgp.utn.edu.ar.daoImp.DaoMedico" scope="singleton">
+		<property name="conexion" ref="beanConexion"></property>
+	</bean>
+	
+	<bean id="beanConexion" class="frgp.utn.edu.ar.daoImp.ConfigHibernate" scope="singleton">
+	</bean>
+	
+	<bean id="beanMedico" class="frgp.utn.edu.ar.entidad.Medico" scope="prototype">
+	</bean>
+	
+</beans>

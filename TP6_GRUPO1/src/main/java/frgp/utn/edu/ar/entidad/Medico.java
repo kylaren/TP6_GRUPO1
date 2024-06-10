@@ -24,6 +24,9 @@ import javax.persistence.Table;
 public class Medico implements Serializable{
 
 	private static final long serialVersionUID = 1L;
+	public enum Estado {
+	    ACTIVO, INACTIVO
+	}
 	
 	@Id
 	@Column(name="legajo")
@@ -45,8 +48,8 @@ public class Medico implements Serializable{
 	private String correo;
 	@Column(name="telefono")
 	private String telefono;
-	
-	
+	@Column(name = "estado")
+    private Estado estado;
 
 	// TIPO DE RELACION CON USUARIO
 	@OneToOne(cascade= (CascadeType.ALL))
@@ -187,6 +190,14 @@ public class Medico implements Serializable{
 	public int getLegajo() {
 		return legajo;
 	}
+	
+	public Estado getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Estado estado) {
+        this.estado = estado;
+    }
 
 	@Override
 	public String toString() {
