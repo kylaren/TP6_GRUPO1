@@ -9,4 +9,5 @@ public interface IMedicoNegocio {
 	public List<Medico> ReadAll();
 	public boolean Update(Medico medico);
 	public boolean Delete(Medico medico);
+	public boolean Exist(String nombreUsuario);
 }

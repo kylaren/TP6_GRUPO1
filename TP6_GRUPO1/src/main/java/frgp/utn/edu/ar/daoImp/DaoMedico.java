@@ -2,7 +2,9 @@ package frgp.utn.edu.ar.daoImp;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import frgp.utn.edu.ar.dao.IdaoMedico;
 import frgp.utn.edu.ar.entidad.Medico;
@@ -30,7 +32,7 @@ public class DaoMedico implements IdaoMedico {
 	        session.save(medico);
 	        session.flush();
 	        session.getTransaction().commit();
-	        Medico savedMedico = (Medico) session.get(Medico.class, medico.getUsuario());
+	        Medico savedMedico = (Medico) session.get(Medico.class, medico.getLegajo());
 	        
 	        if (savedMedico == null) {
 	            estado = false;
@@ -38,11 +40,17 @@ public class DaoMedico implements IdaoMedico {
 	        
 	    } catch (Exception e) {
 	        if (session != null) {
-	            session.getTransaction().rollback();
+	            Transaction transaction = session.getTransaction();
+	            if (transaction != null && transaction.isActive()) {
+	                transaction.rollback();
+	            }
 	        }
 	        e.printStackTrace();
 	    } finally {
-	    }
+	        if (session != null && session.isOpen()) {
+	            session.close();
+	        }
+	       }
 	    
 	    return estado;
 	}
@@ -127,5 +135,20 @@ public class DaoMedico implements IdaoMedico {
 
 	public void setConexion(ConfigHibernate conexion) {
 		this.conexion = conexion;
+	}
+	
+	public boolean Exist(String nombreUsuario) {
+		Session session = conexion.abrirConexion();
+	    session.beginTransaction();
+	    
+	    String hql = "FROM Medico m WHERE m.usuario.nombreUser = :nombreUsuario";
+	    Query query = session.createQuery(hql);
+	    query.setParameter("nombreUsuario", nombreUsuario);
+	    Medico medico = (Medico) query.uniqueResult();
+	    
+	    session.getTransaction().commit();
+	    session.close();
+	    
+	    return medico != null;
 	}
 }

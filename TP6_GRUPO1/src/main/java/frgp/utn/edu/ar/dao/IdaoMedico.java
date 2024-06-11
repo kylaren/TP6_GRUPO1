@@ -7,6 +7,7 @@ public interface IdaoMedico {
 	public boolean Add(Medico medico);
 	public Medico ReadOne(String nombreMedico);
 	public List<Medico> ReadAll();
+	public boolean Exist(String nombreUsuario);
 	public boolean Update(Medico medico);
 	public boolean Delete(Medico medico);
 }

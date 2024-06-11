@@ -55,4 +55,8 @@ public class MedicoNegocio implements IMedicoNegocio {
 	public void setDao(IdaoMedico dao) {
 		this.daoMedico = dao;
 	}
+	
+	public boolean Exist(String nombreUsuario) {
+		return daoMedico.Exist(nombreUsuario);
+	}
 }
