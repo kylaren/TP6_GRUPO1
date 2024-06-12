@@ -30,6 +30,10 @@ public class Turno implements Serializable{
 	    AUSENTE
 	}
 	
+	public enum EstadoT {
+	    ACTIVO, INACTIVO
+	}
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idTurno;
@@ -46,6 +50,8 @@ public class Turno implements Serializable{
 	@Enumerated(EnumType.STRING)
 	@Column(name="estado")
 	private String EstadoTurno;
+	private EstadoT estado;
+	
 	
 	public Turno() {
 		super();
@@ -102,6 +108,13 @@ public class Turno implements Serializable{
 	}
 	public void setEstadoTurno(String estadoTurno) {
 		EstadoTurno = estadoTurno;
+	}
+	
+	public EstadoT getEstado() {
+		return estado;
+	}
+	public void setEstado(EstadoT estado) {
+		this.estado = estado;
 	}
 
 }
