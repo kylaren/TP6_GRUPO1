@@ -7,10 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import frgp.utn.edu.ar.entidad.Medico.Estado;
 
 
 @Entity
@@ -18,7 +21,9 @@ import javax.persistence.Table;
 public class Paciente implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
-
+	public enum Estado {
+	    ACTIVO, INACTIVO
+	}
 	
 	@Id
 	private int dni;
@@ -30,7 +35,7 @@ public class Paciente implements Serializable{
 	private String localidad;
 	private LocalDate fechaNac;
 	private String correo;
-	
+    private Estado estado;
 	
 	// TIPO DE RELACION CON TURNO
 	@OneToMany(mappedBy = "paciente", cascade = {CascadeType.ALL})
@@ -45,7 +50,6 @@ public class Paciente implements Serializable{
 		this.listaTurnos = listaTurnos;
 	}
 
-	
 	public Paciente ( ) {}
 	
 	public Paciente(int dni, String nombre, String apellido, String telefono, String direccion, String provincia,
@@ -133,4 +137,20 @@ public class Paciente implements Serializable{
 	public void setCorreo(String correo) {
 		this.correo = correo;
 	}
+
+	public Estado getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Estado estado) {
+		this.estado = estado;
+	}
+	
+	@Override
+	public String toString() {
+		return "Paciente [dni=" + dni + ", nombre=" + nombre + ", apellido=" + apellido + ", telefono=" + telefono
+				+ ", direccion=" + direccion + ", provincia=" + provincia + ", localidad=" + localidad + ", fechaNac="
+				+ fechaNac + ", correo=" + correo + ", estado=" + estado + ", listaTurnos=" + listaTurnos + "]";
+	}
+	
 }
