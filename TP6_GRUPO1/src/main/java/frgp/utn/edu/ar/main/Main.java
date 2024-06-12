@@ -1,5 +1,6 @@
 package frgp.utn.edu.ar.main;
 
+import java.sql.Time;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -8,9 +9,13 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import frgp.utn.edu.ar.entidad.Especialidad;
 import frgp.utn.edu.ar.entidad.Medico;
+import frgp.utn.edu.ar.entidad.Paciente;
+import frgp.utn.edu.ar.entidad.Turno;
 import frgp.utn.edu.ar.entidad.Usuario;
 import frgp.utn.edu.ar.negocioImp.EspecialidadNegocio;
 import frgp.utn.edu.ar.negocioImp.MedicoNegocio;
+import frgp.utn.edu.ar.negocioImp.PacienteNegocio;
+import frgp.utn.edu.ar.negocioImp.TurnoNegocio;
 
 
 public class Main {
@@ -25,19 +30,43 @@ public class Main {
 		
 		// Se inicializan las variables junto con los beans
 		ApplicationContext appContext = new ClassPathXmlApplicationContext("frgp/utn/edu/ar/resources/Beans.xml");
+		//Medico
 		MedicoNegocio medicoNegocio = (MedicoNegocio) appContext.getBean("beanMedicoNegocio");
 		Medico medico1 = (Medico) appContext.getBean("beanMedico");		
+		//Especialidad
 		EspecialidadNegocio especialidadNegocio = (EspecialidadNegocio) appContext.getBean("beanEspecialidadNegocio");
 		Especialidad especialidad1 = (Especialidad) appContext.getBean("beanEspecialidad");	
+		//Paciente
+		PacienteNegocio pacienteNegocio = (PacienteNegocio) appContext.getBean("beanPacienteNegocio");
+		Paciente paciente1 = (Paciente) appContext.getBean("beanPaciente");	
+		//Turno
+		TurnoNegocio turnoNegocio = (TurnoNegocio) appContext.getBean("beanTurnoNegocio");
+		Turno turno1 = (Turno) appContext.getBean("beanTurno");	
+
 		
 		
 		//Usuario de prueba (falta hacer capas, beans, etc)
         Usuario user1 = new Usuario("john123","qwerty");
+        
         //Especialidad
         especialidad1.setNombre("Odontología");
         especialidadNegocio.Add(especialidad1);
+        
+        //Paciente
+        paciente1.setPacienteDetails(11214589, "Juan Carlos", "Jiménez Rufino", "123456", "Siempre viva 742", 
+                "Massachusetts", "Springfield", LocalDate.of(1990, 5, 15), "juan.carlos@mail.com");
+                
+        estado = pacienteNegocio.Exist(11214589);        
+	     if(estado == false){
+	         pacienteNegocio.Add(paciente1);
+	 	      	System.out.println(MENSAJE_AGREGADO);	 
+	     }
+	     else
+	    	 System.out.println("Paciente " + MENSAJE_YA_EXISTE);
+	                     
+        //Medico
         medico1.setMedicoDetails("John", "Doe", "M", LocalDate.of(1980, 1, 1), "street 123", "Glendale",
-                "john@connor.com", "9999", user1, especialidad1);		
+                "john@connor.com", "9999", user1, especialidad1);		   
         
 	     estado = medicoNegocio.Exist("john123");
 	     if(estado == false){
@@ -47,6 +76,20 @@ public class Main {
 	     else {
 	    	 System.out.println(MENSAJE_YA_EXISTE);
 	     }
+	     
+	     
+	     
+	     //Turno
+	     turno1.setTurnoDetails(medico1, paciente1, LocalDate.now(), new Time(System.currentTimeMillis()), "Todo en orden", Turno.EstadoTurno.PENDIENTE.name());     
+	     estado = turnoNegocio.Exist(1);
+	     if(estado == false){
+	    	 	turnoNegocio.Add(turno1);
+	 	      	System.out.println(MENSAJE_AGREGADO);	 
+	     }
+	     else {
+	    	 System.out.println(MENSAJE_YA_EXISTE);
+	     }
+
 	     
 	     //LEE TODOS:
 	     List<Medico> medicos = medicoNegocio.ReadAll();

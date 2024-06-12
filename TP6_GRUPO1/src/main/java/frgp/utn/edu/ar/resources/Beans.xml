@@ -37,5 +37,29 @@
     <bean id="beanEspecialidad" class="frgp.utn.edu.ar.entidad.Especialidad" scope="prototype">
 	</bean>
 
+	<bean id="beanPacienteNegocio" class="frgp.utn.edu.ar.negocioImp.PacienteNegocio">
+    <property name="daoPaciente" ref="beanDaoPaciente" />
+    </bean>
+    
+	<bean id="beanDaoPaciente" class="frgp.utn.edu.ar.daoImp.DaoPaciente">
+    <constructor-arg ref="beanConexion" />
+    </bean>
+    
+    <bean id="beanPaciente" class="frgp.utn.edu.ar.entidad.Paciente" scope="prototype">
+    	 	<property name="estado" value="ACTIVO"/>
+	</bean>
+
+	<bean id="beanTurnoNegocio" class="frgp.utn.edu.ar.negocioImp.TurnoNegocio">
+	    <property name="daoTurno" ref="beanDaoTurno" />
+	</bean>
+	
+	<bean id="beanDaoTurno" class="frgp.utn.edu.ar.daoImp.DaoTurno">
+	    <constructor-arg ref="beanConexion" />
+	</bean>
+	
+	<bean id="beanTurno" class="frgp.utn.edu.ar.entidad.Turno" scope="prototype">
+		 	<property name="estado" value="ACTIVO"/>
+	</bean>
+
 
 </beans>

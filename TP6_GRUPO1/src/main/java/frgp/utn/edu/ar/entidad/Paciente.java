@@ -65,6 +65,21 @@ public class Paciente implements Serializable{
 		this.fechaNac = fechaNac;
 		this.correo = correo;
 	}
+	
+	
+	//facilitar
+    public void setPacienteDetails(int dni, String nombre, String apellido, String telefono, String direccion,
+            String provincia, String localidad, LocalDate fechaNac, String correo) {
+		this.dni = dni;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.telefono = telefono;
+		this.direccion = direccion;
+		this.provincia = provincia;
+		this.localidad = localidad;
+		this.fechaNac = fechaNac;
+		this.correo = correo;
+}
 
 	public int getDni() {
 		return dni;

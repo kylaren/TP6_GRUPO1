@@ -48,8 +48,10 @@ public class Turno implements Serializable{
 	private Time hora;
 	private String observacion;
 	@Enumerated(EnumType.STRING)
-	@Column(name="estado")
+	@Column(name="estado_turno")
 	private String EstadoTurno;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "estado")
 	private EstadoT estado;
 	
 	
@@ -66,6 +68,18 @@ public class Turno implements Serializable{
 		this.observacion = observacion;
 		EstadoTurno = estadoTurno;
 	}
+	
+	//facilitar
+    public void setTurnoDetails(Medico medico, Paciente paciente, LocalDate fecha, Time hora, String observacion,
+            String estadoTurno) {
+		this.medico = medico;
+		this.paciente = paciente;
+		this.fecha = fecha;
+		this.hora = hora;
+		this.observacion = observacion;
+		this.EstadoTurno = estadoTurno;
+		}
+    
 	public int getIdTurno() {
 		return idTurno;
 	}
