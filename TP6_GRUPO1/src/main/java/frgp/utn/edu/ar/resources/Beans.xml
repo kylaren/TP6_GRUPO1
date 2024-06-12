@@ -59,6 +59,20 @@
 	
 	<bean id="beanTurno" class="frgp.utn.edu.ar.entidad.Turno" scope="prototype">
 		 	<property name="estado" value="ACTIVO"/>
+	</bean>	
+
+	<bean id="beanUsuarioNegocio" class="frgp.utn.edu.ar.negocioImp.UsuarioNegocio">
+	    <property name="daoUsuario" ref="beanDaoUsuario" />
+	</bean>
+	
+	<bean id="beanDaoUsuario" class="frgp.utn.edu.ar.daoImp.DaoUsuario">
+	    <constructor-arg ref="beanConexion" />
+	</bean>
+	
+	<bean id="beanUsuario" class="frgp.utn.edu.ar.entidad.Usuario" scope="prototype">
+	</bean>
+	
+	<bean id="beanHorario" class="frgp.utn.edu.ar.entidad.Horario" scope="prototype">
 	</bean>
 
 

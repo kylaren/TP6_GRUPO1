@@ -47,7 +47,15 @@ public class Horario implements Serializable {
         this.horaFin = horaFin;
         this.medico = medico;
     }
-
+    
+// para faciltarr
+    public void setHorarioDetails(String dia, LocalTime horaInicio, LocalTime horaFin, Medico medico) {
+        this.dia = DayOfWeek.valueOf(dia.toUpperCase());
+        this.horaInicio = horaInicio;
+        this.horaFin = horaFin;
+        this.medico = medico;
+    }
+    
     public int getId() {
         return id;
     }

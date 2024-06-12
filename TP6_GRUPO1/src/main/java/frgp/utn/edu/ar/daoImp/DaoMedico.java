@@ -9,7 +9,6 @@ import org.hibernate.Transaction;
 import frgp.utn.edu.ar.dao.IdaoMedico;
 import frgp.utn.edu.ar.entidad.Medico;
 import frgp.utn.edu.ar.entidad.Medico.Estado;
-import frgp.utn.edu.ar.entidad.Usuario;
 
 public class DaoMedico implements IdaoMedico {
 	private ConfigHibernate conexion;
