@@ -1,9 +1,11 @@
 package frgp.utn.edu.ar.daoImp;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 
 import frgp.utn.edu.ar.dao.IdaoEspecialidad;
 import frgp.utn.edu.ar.entidad.Especialidad;
+import frgp.utn.edu.ar.entidad.Medico;
 
 public class DaoEspecialidad implements IdaoEspecialidad {
     private ConfigHibernate conexion;
@@ -44,5 +46,29 @@ public class DaoEspecialidad implements IdaoEspecialidad {
         }
 
         return estado;
+    }
+    
+    public boolean Exist(String nombreEspecialidad) {
+        Session session = null;
+        boolean exists = false;
+
+        try {
+            session = conexion.abrirConexion();
+            String hql = "FROM Especialidad e WHERE e.nombre = :nombre";
+            Query query = session.createQuery(hql);
+            query.setParameter("nombre", nombreEspecialidad);
+            Especialidad especialidad = (Especialidad) query.uniqueResult();
+            if(especialidad != null)
+            	exists = true;
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+
+        return exists;
     }
 }

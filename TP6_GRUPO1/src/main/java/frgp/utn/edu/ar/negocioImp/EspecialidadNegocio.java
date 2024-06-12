@@ -14,7 +14,16 @@ public class EspecialidadNegocio implements IEspecialidadNegocio {
     }
 
     public boolean Add(Especialidad especialidad) {
-        return daoEspecialidad.Add(especialidad);
+    	
+    	 if (Exist(especialidad.getNombre())) {
+             return false; // La especialidad ya existe
+         } else {
+             return daoEspecialidad.Add(especialidad);
+         }
+    }
+    
+    public boolean Exist(String nombreEspecialidad) {
+        return daoEspecialidad.Exist(nombreEspecialidad);
     }
 
 }

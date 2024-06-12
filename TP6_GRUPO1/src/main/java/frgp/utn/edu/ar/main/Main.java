@@ -33,7 +33,8 @@ public class Main {
 		
 		//Usuario de prueba (falta hacer capas, beans, etc)
         Usuario user1 = new Usuario("john123","qwerty");
-
+        //Especialidad
+        especialidad1.setNombre("Odontología");
         especialidadNegocio.Add(especialidad1);
         medico1.setMedicoDetails("John", "Doe", "M", LocalDate.of(1980, 1, 1), "street 123", "Glendale",
                 "john@connor.com", "9999", user1, especialidad1);		
@@ -53,7 +54,7 @@ public class Main {
 			System.out.println(MENSAJE_LISTADO_TODOS_LOS_USUARIOS + medico.toString());
 		}
 	    
-	     medicoNegocio.Delete(2);
+	     medicoNegocio.Delete(1);
 	     
 	   //LEE TODOS:
 	     System.out.println("Se lee de nuevo la lista de medicos!");
