@@ -216,8 +216,21 @@ public class Medico implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Medico -- legajo=" + legajo + ", nombre=" + nombre + ", apellido=" + apellido + ", sexo=" + sexo
-				+ ", fechaNac=" + fechaNac + ", direccion=" + direccion + ", localidad=" + localidad + ", correo="
-				+ correo + ", telefono=" + telefono + ", usuario=" + usuario.getNombreUser() + ", especialidad="+ especialidad.getNombre() ;
+	    StringBuilder sb = new StringBuilder();
+	    sb.append("Medico {").append("\n")
+	      .append("  legajo: ").append(legajo).append(",\n")
+	      .append("  nombre: ").append(nombre).append(",\n")
+	      .append("  apellido: ").append(apellido).append(",\n")
+	      .append("  sexo: ").append(sexo).append(",\n")
+	      .append("  fechaNac: ").append(fechaNac).append(",\n")
+	      .append("  direccion: ").append(direccion).append(",\n")
+	      .append("  localidad: ").append(localidad).append(",\n")
+	      .append("  correo: ").append(correo).append(",\n")
+	      .append("  telefono: ").append(telefono).append(",\n")
+	      .append("  estado: ").append(estado).append(",\n")
+	      .append("  usuario: ").append(usuario != null ? usuario.getNombreUser() : "N/A").append(",\n")
+	      .append("  especialidad: ").append(especialidad != null ? especialidad.getNombre() : "N/A").append("\n")
+	      .append("}");
+	    return sb.toString();
 	}
 }

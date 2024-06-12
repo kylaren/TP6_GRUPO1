@@ -8,6 +8,6 @@ public interface IMedicoNegocio {
 	public Medico ReadOne(String nombreMedico);
 	public List<Medico> ReadAll();
 	public boolean Update(Medico medico);
-	public boolean Delete(Medico medico);
+	public boolean Delete(int legajo);
 	public boolean Exist(String nombreUsuario);
 }

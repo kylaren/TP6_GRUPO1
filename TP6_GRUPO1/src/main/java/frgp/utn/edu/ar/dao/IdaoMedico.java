@@ -9,5 +9,5 @@ public interface IdaoMedico {
 	public List<Medico> ReadAll();
 	public boolean Exist(String nombreUsuario);
 	public boolean Update(Medico medico);
-	public boolean Delete(Medico medico);
+	public boolean Delete(int legajo);
 }

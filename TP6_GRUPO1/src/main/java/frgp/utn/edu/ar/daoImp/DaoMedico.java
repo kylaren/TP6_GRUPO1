@@ -89,36 +89,37 @@ public class DaoMedico implements IdaoMedico {
 		return estado;
 	}
 	
-	public boolean Delete(Medico medico){	
-		boolean estado = true;
-		conexion = new ConfigHibernate();
+	public boolean Delete(int legajo) {	
+	    boolean estado = true;
+	    conexion = new ConfigHibernate();
 	    Session session = null;
 
 	    try {
 	        session = conexion.abrirConexion();
 	        session.beginTransaction();
-	        
-	        medico.setEstado(Estado.INACTIVO);
-	        session.update(medico);
-	        session.flush();
-	        session.getTransaction().commit();
-	        
-	        Medico savedMedico = (Medico) session.get(Medico.class, medico.getUsuario());
-	        if (savedMedico.getEstado() != Estado.INACTIVO) {
+	        System.out.println("medico a eliminar legajo: " + legajo);
+		    Medico medicoDB = (Medico)session.get(Medico.class, legajo);
+	        if (medicoDB != null) {
+	            medicoDB.setEstado(Estado.INACTIVO);
+	            session.update(medicoDB);
+	            session.getTransaction().commit();
+	            estado = true;
+	        } else {
 	            estado = false;
 	        }
 	    } catch (Exception e) {
 	        if (session != null) {
 	            session.getTransaction().rollback();
 	        }
+	        estado = false;
 	        e.printStackTrace();
 	    } finally {
 	        if (session != null) {
 	            session.close();
 	        }
 	    }
-	    
-		return estado;
+
+	    return estado;
 	}
 
 	public List<Medico> ReadAll() {		

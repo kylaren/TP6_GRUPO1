@@ -39,21 +39,29 @@ public class Main {
                 "john@connor.com", "9999", user1, especialidad1);		
         
 	     estado = medicoNegocio.Exist("john123");
-	     if(estado == false)
-	     {
+	     if(estado == false){
 	    	 	medicoNegocio.Add(medico1);
 	 	      	System.out.println(MENSAJE_AGREGADO);	 
 	     }
-	     else
-	    		System.out.println(MENSAJE_YA_EXISTE);
-	     
+	     else {
+	    	 System.out.println(MENSAJE_YA_EXISTE);
+	     }
 	     
 	     //LEE TODOS:
 	     List<Medico> medicos = medicoNegocio.ReadAll();
 	     for (Medico medico: medicos) {
-			System.out.println(MENSAJE_LISTADO_TODOS_LOS_USUARIOS+medico.toString());
-			
+			System.out.println(MENSAJE_LISTADO_TODOS_LOS_USUARIOS + medico.toString());
 		}
+	    
+	     medicoNegocio.Delete(2);
+	     
+	   //LEE TODOS:
+	     System.out.println("Se lee de nuevo la lista de medicos!");
+	     List<Medico> listaMedicos = medicoNegocio.ReadAll();
+	     for (Medico medico: listaMedicos) {
+			System.out.println(MENSAJE_LISTADO_TODOS_LOS_USUARIOS + medico.toString());
+		}
+	     
 	}
 
 }

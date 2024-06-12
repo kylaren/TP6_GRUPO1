@@ -44,8 +44,8 @@ public class MedicoNegocio implements IMedicoNegocio {
 		return daoMedico.Update(medico);
 	}
 
-	public boolean Delete(Medico medico) {
-		return daoMedico.Delete(medico);
+	public boolean Delete(int legajo) {
+		return daoMedico.Delete(legajo);
 	}
 
 	public IdaoMedico getDao() {
